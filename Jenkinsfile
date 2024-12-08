@@ -17,7 +17,7 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                    bat 'docker run -d -p 3000:3000 todo-application3'
+                   bat 'docker run -d -p 3000:3000 --name todo-app-container todo-application3'
                 }
             }
         }
