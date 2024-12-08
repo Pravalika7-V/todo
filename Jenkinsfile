@@ -1,15 +1,11 @@
 pipeline {
     agent any
-    
+
     stages {
-        // stage('Checkout') {
-        //     steps {
-        //         git branch: 'main', url: 'https://github.com/Pravalika7-V/todo.git'
-        //     }
-        // }
         stage('Build Docker Image') {
             steps {
                 script {
+                    // Build the Docker image with the correct name
                     bat 'docker build -t todo-application3 .'
                 }
             }
@@ -17,7 +13,8 @@ pipeline {
         stage('Run Docker Container') {
             steps {
                 script {
-                   bat 'docker run -d -p 3000:3000 --name todo-app-container todo-application3'
+                    // Run the Docker container with the specified image name
+                    bat 'docker run -d -p 3000:3000 --name todo-app-container todo-application3'
                 }
             }
         }
@@ -25,7 +22,7 @@ pipeline {
     post {
         always {
             script {
-                // Cleanup after build
+                // Stop and remove the container after the pipeline execution
                 bat 'docker stop todo-app-container || echo "Container not running"'
                 bat 'docker rm todo-app-container || echo "Container not found"'
             }
