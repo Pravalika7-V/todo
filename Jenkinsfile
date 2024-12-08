@@ -10,14 +10,14 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    bat 'docker build -t todo-app .'
+                    bat 'docker build -t todo-application3 .'
                 }
             }
         }
         stage('Run Docker Container') {
             steps {
                 script {
-                    bat 'docker run -d -p 3000:3000 --name todo-app-container todo-app'
+                    bat 'docker run -d -p 3000:3000 todo-application3'
                 }
             }
         }
